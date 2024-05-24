@@ -26,8 +26,8 @@ namespace ExamenMusicaNetCoreMVC.Controllers
             ViewData["OrdenLugar"] = sortOrder == "Lugar" ? "Lugar_desc" : "Lugar";
             ViewData["OrdenGenero"] = sortOrder == "Genero" ? "Genero_desc" : "Genero";
             ViewData["OrdenFecha"] = sortOrder == "Fecha" ? "Fecha_desc" : "Fecha";
-            ViewData["OrdenGenero"] = sortOrder == "Titulo" ? "Titulo_desc" : "Titulo";
-            ViewData["OrdenFecha"] = sortOrder == "Precio" ? "Precio_desc" : "Precio";
+            ViewData["OrdenTitulo"] = sortOrder == "Titulo" ? "Titulo_desc" : "Titulo";
+            ViewData["OrdenPrecio"] = sortOrder == "Precio" ? "Precio_desc" : "Precio";
 
             ViewData["CurrentFilter"] = searchString;
 
@@ -81,7 +81,7 @@ namespace ExamenMusicaNetCoreMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Fecha,Genero,Lugar")] Concierto concierto)
+        public async Task<IActionResult> Create([Bind("Id,Fecha,Genero,Lugar,Titulo,Precio")] Concierto concierto)
         {
             if (ModelState.IsValid)
             {
@@ -113,7 +113,7 @@ namespace ExamenMusicaNetCoreMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,Genero,Lugar")] Concierto concierto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Fecha,Genero,Lugar,Titulo,Precio")] Concierto concierto)
         {
             if (id != concierto.Id)
             {
