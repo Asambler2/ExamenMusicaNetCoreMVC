@@ -26,6 +26,8 @@ namespace ExamenMusicaNetCoreMVC.Controllers
             ViewData["OrdenLugar"] = sortOrder == "Lugar" ? "Lugar_desc" : "Lugar";
             ViewData["OrdenGenero"] = sortOrder == "Genero" ? "Genero_desc" : "Genero";
             ViewData["OrdenFecha"] = sortOrder == "Fecha" ? "Fecha_desc" : "Fecha";
+            ViewData["OrdenGenero"] = sortOrder == "Titulo" ? "Titulo_desc" : "Titulo";
+            ViewData["OrdenFecha"] = sortOrder == "Precio" ? "Precio_desc" : "Precio";
 
             ViewData["CurrentFilter"] = searchString;
 
@@ -42,6 +44,10 @@ namespace ExamenMusicaNetCoreMVC.Controllers
                 case "Genero_desc": return View(await _context.Conciertos.OrderByDescending(s => s.Genero).ToListAsync());
                 case "Lugar": return View(await _context.Conciertos.OrderBy(s => s.Lugar).ToListAsync());
                 case "Lugar_desc": return View(await _context.Conciertos.OrderByDescending(s => s.Lugar).ToListAsync());
+                case "Titulo": return View(await _context.Conciertos.OrderBy(s => s.Titulo).ToListAsync());
+                case "Titulo_desc": return View(await _context.Conciertos.OrderByDescending(s => s.Titulo).ToListAsync());
+                case "Precio": return View(await _context.Conciertos.OrderBy(s => s.Precio).ToListAsync());
+                case "Precio_desc": return View(await _context.Conciertos.OrderByDescending(s => s.Precio).ToListAsync());
             }
             return View(await _context.Conciertos.ToListAsync());
         }

@@ -10,7 +10,6 @@ namespace ExamenMusicaNetCoreMVC.Models
         [Required]
         public int Id { get; set; }
         [Required]
-        [RegularExpression("([0-9]{2})([/])([0-9]{2})([/])([0-9]{4})", ErrorMessage = "Fecha invalida")]
         public DateTime? Fecha { get; set; }
         [Required]
         [MinLength(4)]
@@ -20,6 +19,13 @@ namespace ExamenMusicaNetCoreMVC.Models
         [MinLength(4)]
         [MaxLength(15)]
         public string? Lugar { get; set; }
+        [Required]
+        [MinLength(4)]
+        [MaxLength(45)]
+        public string? Titulo { get; set; }
+        [Required]
+        [Range(0, 500)]
+        public decimal? Precio { get; set; }
 
     }
 }
