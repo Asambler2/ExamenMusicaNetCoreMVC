@@ -29,8 +29,6 @@ namespace ExamenMusicaNetCoreMVC.Controllers
             ViewData["OrdenGenero"] = sortOrder == "Genero" ? "Genero_desc" : "Genero";
             ViewData["OrdenTitulo"] = sortOrder == "Titulo" ? "Titulo_desc" : "Titulo";
 
-            ViewData["OrdenGrupo"] = sortOrder == "Grupo" ? "Grupo_desc" : "Grupo";
-
             ViewData["CurrentFilter"] = searchString;
 
             if (!String.IsNullOrEmpty(searchString))

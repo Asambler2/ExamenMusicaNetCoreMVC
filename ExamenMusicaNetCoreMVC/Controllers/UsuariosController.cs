@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExamenMusicaNetCoreMVC.Data;
 using ExamenMusicaNetCoreMVC.Models;
+using Microsoft.Data.SqlClient;
 
 namespace ExamenMusicaNetCoreMVC.Controllers
 {
@@ -20,8 +21,29 @@ namespace ExamenMusicaNetCoreMVC.Controllers
         }
 
         // GET: Usuarios
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
+            ViewData["OrdenNombre"] = sortOrder == "Nombre" ? "Nombre_desc" : "Nombre";
+            ViewData["OrdenEmail"] = sortOrder == "Email" ? "Email_desc" : "Email";
+            ViewData["OrdenPass"] = sortOrder == "Pass" ? "Pass_desc" : "Pass";
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return View(await _context.Usuarios.Where(s => s.Nombre.Contains(searchString)).ToListAsync());
+            }
+
+            switch (sortOrder)
+            {
+                case "Pass": return View(await _context.Usuarios.OrderBy(s => s.Contraseña).ToListAsync());
+                case "Pass_desc": return View(await _context.Usuarios.OrderByDescending(s => s.Contraseña).ToListAsync());
+                case "Email": return View(await _context.Usuarios.OrderBy(s => s.Email).ToListAsync());
+                case "Email_desc": return View(await _context.Usuarios.OrderByDescending(s => s.Email).ToListAsync());
+                case "Nombre": return View(await _context.Usuarios.OrderBy(s => s.Nombre).ToListAsync());
+                case "Nombre_desc": return View(await _context.Usuarios.OrderByDescending(s => s.Nombre).ToListAsync());
+            }
+
             return View(await _context.Usuarios.ToListAsync());
         }
 

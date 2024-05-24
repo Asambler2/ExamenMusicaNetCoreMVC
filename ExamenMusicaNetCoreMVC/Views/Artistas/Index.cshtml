@@ -12,17 +12,17 @@
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Busca por Nombre: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            Busca por Nombre: <input id="texto"  type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
             <input type="submit" value="Search" class="btn btn-default" /> |
             <a asp-action="Index">Vuelve a la lista entera</a>
         </p>
     </div>
 </form>
-<table class="table">
+<table class="table" id="tableData">
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["OrdennOMBRE"]">@Html.DisplayNameFor(model => model.Nombre)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["OrdenNombre"]">@Html.DisplayNameFor(model => model.Nombre)</a>
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["OrdenGenero"]">@Html.DisplayNameFor(model => model.Genero)</a>

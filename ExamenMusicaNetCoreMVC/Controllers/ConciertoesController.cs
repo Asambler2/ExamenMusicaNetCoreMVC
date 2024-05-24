@@ -21,11 +21,18 @@ namespace ExamenMusicaNetCoreMVC.Controllers
         }
 
         // GET: Conciertoes
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["OrdenLugar"] = sortOrder == "Lugar" ? "Lugar_desc" : "Lugar";
             ViewData["OrdenGenero"] = sortOrder == "Genero" ? "Genero_desc" : "Genero";
             ViewData["OrdenFecha"] = sortOrder == "Fecha" ? "Fecha_desc" : "Fecha";
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return View(await _context.Conciertos.Where(s => s.Genero.Contains(searchString)).ToListAsync());
+            }
 
             switch (sortOrder)
             {

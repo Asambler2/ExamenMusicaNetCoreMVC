@@ -32,7 +32,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Canciones" asp-action="Index">Canciones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Conciertoes" asp-action="Index">Cociertos</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Conciertoes" asp-action="Index">Conciertos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="ConciertosGrupoes" asp-action="Index">ConciGrup</a>
@@ -71,6 +71,16 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $("#texto").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+
+            $("#tableData tr").each(function () {
+                var $tr = $(this);
+                $tr.toggle($tr.find('td:gt(0)').text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

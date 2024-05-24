@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExamenMusicaNetCoreMVC.Data;
 using ExamenMusicaNetCoreMVC.Models;
+using Microsoft.Data.SqlClient;
 
 namespace ExamenMusicaNetCoreMVC.Controllers
 {
@@ -20,8 +21,23 @@ namespace ExamenMusicaNetCoreMVC.Controllers
         }
 
         // GET: Grupoes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
+            ViewData["OrdenNombre"] = sortOrder == "Nombre" ? "Nombre_desc" : "Nombre";
+
+            ViewData["CurrentFilter"] = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return View(await _context.Grupos.Where(s => s.Nombre.Contains(searchString)).ToListAsync());
+            }
+
+            switch (sortOrder)
+            {
+                case "Nombre": return View(await _context.Grupos.OrderBy(s => s.Nombre).ToListAsync());
+                case "Nombre_desc": return View(await _context.Grupos.OrderByDescending(s => s.Nombre).ToListAsync());
+            }
+
             return View(await _context.Grupos.ToListAsync());
         }
 
