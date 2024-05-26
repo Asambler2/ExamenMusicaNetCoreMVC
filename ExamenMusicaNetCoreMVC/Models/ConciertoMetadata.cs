@@ -12,7 +12,7 @@ namespace ExamenMusicaNetCoreMVC.Models
         [Required]
         public DateTime? Fecha { get; set; }
         [Required]
-        [MinLength(4)]
+        [MinLength(2)]
         [MaxLength(15)]
         public string? Genero { get; set; }
         [Required]
@@ -25,6 +25,7 @@ namespace ExamenMusicaNetCoreMVC.Models
         public string? Titulo { get; set; }
         [Required]
         [Range(0, 500)]
+        //[RegularExpression("^[0-9]+([.][0-9]{2})?$", ErrorMessage = "Precio invalido")]
         public decimal? Precio { get; set; }
 
     }

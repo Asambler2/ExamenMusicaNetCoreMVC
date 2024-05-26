@@ -14,7 +14,7 @@ namespace ExamenMusicaNetCoreMVC.Models
         [MaxLength(15)]
         public string? Titulo { get; set; }
         [Required]
-        [MinLength(4)]
+        [MinLength(2)]
         [MaxLength(15)]
         public string? Genero { get; set; }
         [Required]

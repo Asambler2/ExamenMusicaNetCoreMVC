@@ -15,7 +15,7 @@ namespace ExamenMusicaNetCoreMVC.Models
         [RegularExpression("([0-9]{2})([/])([0-9]{2})([/])([0-9]{4})", ErrorMessage = "Fecha invalida")]
         public DateOnly? Fecha { get; set; }
         [Required]
-        [MinLength(4)]
+        [MinLength(2)]
         [MaxLength(15)]
         public string? Genero { get; set; }
         [Required]
